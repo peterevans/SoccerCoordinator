@@ -128,8 +128,9 @@ nonexperiencedList = sortByHeight(roster: nonexperiencedList)
 splitToThreeTeams(roster: experiencedList)
 splitToThreeTeams(roster: nonexperiencedList)
 
-printAvgHeight(roster: experiencedList)
-printAvgHeight(roster: nonexperiencedList)
+printAvgHeight(roster: teamDragons)
+printAvgHeight(roster: teamSharks)
+printAvgHeight(roster: teamRaptors)
 
 // generates the letters for each team
 generateTeamLetters(teamName: team1Name, teamPracticeTime: team1PracticeTime, roster: teamDragons)
