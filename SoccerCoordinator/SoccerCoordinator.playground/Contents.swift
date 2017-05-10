@@ -41,6 +41,39 @@ var teamRaptors: [[String: String]] = []
 // empty array to hold the letters for each player's parents
 var letters: [String] = []
 
+
+// this function uses a bubble sort to sort a roster by height, returns a sorted roster
+func sortByHeight(roster: [[String: String]]) -> [[String: String]] {
+    var sortedRoster = roster
+    
+    while true {
+        var swapped = false
+        for index in 1..<sortedRoster.count {
+            if sortedRoster[index]["height"]! < sortedRoster[index - 1]["height"]! {
+                let temp = sortedRoster[index]
+                sortedRoster[index] = sortedRoster[index - 1]
+                sortedRoster[index - 1] = temp
+                swapped = true
+            }
+        }
+        if !swapped {
+            break
+        }
+    }
+    return sortedRoster
+}
+
+
+// prints out the avergae height for a given roster
+func printAvgHeight(roster: [[String: String]]) {
+    var sumOfHeights = 0.0
+    for player in roster {
+        sumOfHeights = sumOfHeights + Double(player["height"]!)!
+    }
+    let avgRosterHeight = sumOfHeights / Double(roster.count)
+    print(" Average Team Height: \(avgRosterHeight)")
+}
+
 // function takes a list of players and splits them evenly into three teams
 // the loop runs through and adds every thrid player to a specific team roster
 
@@ -75,6 +108,8 @@ func generateTeamLetters(teamName: String, teamPracticeTime: String, roster: [[S
 var experiencedList: [[String: String]] = []
 var nonexperiencedList: [[String: String]] = []
 
+
+
 for player in players {
     if player["experience"] == "yes" {
         experiencedList.append(player)
@@ -84,10 +119,17 @@ for player in players {
     }
 }
 
+experiencedList = sortByHeight(roster: experiencedList)
+nonexperiencedList = sortByHeight(roster: nonexperiencedList)
+
+
+
 //calls the fucntion to take each team list and split it into three team roster_list
 splitToThreeTeams(roster: experiencedList)
 splitToThreeTeams(roster: nonexperiencedList)
 
+printAvgHeight(roster: experiencedList)
+printAvgHeight(roster: nonexperiencedList)
 
 // generates the letters for each team
 generateTeamLetters(teamName: team1Name, teamPracticeTime: team1PracticeTime, roster: teamDragons)
